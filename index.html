@@ -1,111 +1,199 @@
 <!DOCTYPE html>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    overflow: hidden;
+    display: flex;
+    background: #070716;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  #drag,
+  #spin {
+    position: relative;
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-items: center;
+    transform-style: preserve-3d;
+    transform: rotateX(-5deg);
+  }
+
+  #drag .product-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  #drag .product-card:hover {
+    transform: scale(1.05);
+  }
+
+  #ground {
+    width: 900px;
+    height: 900px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(90deg);
+  }
+
+  @keyframes spinRevert {
+    from {
+      transform: rotateY(360deg);
+    }
+    to {
+      transform: rotateY(0deg);
+    }
+  }
+</style>
+
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="starboylmao2.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="starboylmao2.css">
 </head>
+
 <body>
 
-<div id="drag">
+  <div id="drag">
     <div id="spin">
-        <img src="7.jpg" alt="">
-        <img src="6.jpg">
-        <img src="4.jpg" alt="description">
-        <img src="1.jpg" alt="">
-        <img src="2.jpg" alt="">
-        <img src="5.jpeg" alt="">
-        <img src="3.jpg" alt="">
+      <a href="https://solestockeruk.com/products/dunk-low-grey-fog" class="product-card">
+        <img src="https://cdn.shopify.com/s/files/1/0768/6019/5112/files/8322DE82-3643-43EE-B9DA-0790D87708F8.png?v=1686505105&width=990" alt="Product 1" style="width: 200px; height: 240px;">
+        <h3>Product 1</h3> 
+        <p>Description of Product 1</p>
+      </a>
+      <a href="https://solestockeruk.com/products/jordan-4-black-canvas" class="product-card">
+        <img src="https://cdn.shopify.com/s/files/1/0768/6019/5112/files/A50B1184-7F45-4234-A338-BEF94621219D.png?v=1686505194&width=990" alt="Product 2" style="width: 200px; height: 240px;">
+        <h3>Product 2</h3>
+        <p>Description of Product 2</p>
+      </a>
+      <a href="https://solestockeruk.com/products/jordan-4-craft" class="product-card">
+        <img src="https://cdn.shopify.com/s/files/1/0768/6019/5112/files/C0592089-4CC2-4D2E-B5A3-9D966D4F1709.png?v=1686505220&width=990" alt="Product 3" style="width: 200px; height: 240px;">
+        <h3>Product 3</h3>
+        <p>Description of Product 3</p>
+      </a>
+      <a href="https://solestockeruk.com/products/jordan-4-yellow-thunder" class="product-card">
+        <img src="https://cdn.shopify.com/s/files/1/0768/6019/5112/files/252D6DB4-3300-49D5-BC00-070349133E5E.png?v=1686505246&width=990" alt="Product 3" style="width: 200px; height: 240px;">
+        <h3>Product 3</h3>
+        <p>Description of Product 3</p>
+      </a>
+      <a href="https://solestockeruk.com/products/jordan-4-sb-pine-green" class="product-card">
+        <img src="https://cdn.shopify.com/s/files/1/0768/6019/5112/files/EC41222A-9735-44C0-82F1-5E67FDDBF588.png?v=1686505167&width=990" alt="Product 3" style="width: 200px; height: 240px;">
+        <h3>Product 3</h3>
+        <p>Description of Product 3</p>
+      </a>
+      <a href="https://solestockeruk.com/products/jordan-1-high-lost-and-found" class="product-card">
+        <img src="https://cdn.shopify.com/s/files/1/0768/6019/5112/files/B32B91BD-A88D-494B-8F24-4CAEB4970F99.png?v=1686505122&width=990" alt="Product 3" style="width: 200px; height: 240px;">
+        <h3>Product 3</h3>
+        <p>Description of Product 3</p>
+      </a>
+      <!-- Add more product cards as needed -->
     </div>
     <div id="ground"></div>
-</div>
+  </div>
 
-<script>
-    var radius = 340;
-    var autoRotate = true;
-    var rotateSpeed = -60;
-    var imgWidth = 190;
-    var imgHeight = 230;
+  <script>
+   var radius = 200;
+var autoRotate = true;
+var rotateSpeed = -60;
+var imgWidth = 200;
+var imgHeight = 240;
 
-    setTimeout(init, 1000);
+setTimeout(init, 1000);
 
-    var odrag = document.getElementById('drag');
-    var ospin = document.getElementById('spin');
-    var aimg = ospin.getElementsByTagName('img');
-    var aEle = Array.from(aimg);
+var odrag = document.getElementById('drag');
+var ospin = document.getElementById('spin');
+var aEle = Array.from(ospin.getElementsByClassName('product-card'));
 
-    ospin.style.width = imgWidth + "px";
-    ospin.style.height = imgHeight + "px";
+odrag.style.width = imgWidth + "px"; // Updated: Use odrag instead of ospin
+odrag.style.height = imgHeight + "px"; // Updated: Use odrag instead of ospin
 
-    var ground = document.getElementById('ground');
-    ground.style.width = radius * 3 + "px";
-    ground.style.height = radius * 3 + "px";
+var ground = document.getElementById('ground');
+ground.style.width = radius * 3 + "px";
+ground.style.height = radius * 3 + "px";
 
     function init(delayTime) {
-        for (var i = 0; i < aEle.length; i++) {
-            aEle[i].style.transform = "rotateY(" + (i * (360 / aEle.length)) + "deg) translateZ(" + radius + "px)";
-            aEle[i].style.transition = "transform 1s";
-            aEle[i].style.transitionDelay = (delayTime || (aEle.length - i) / 4) + "s";
-        }
+      for (var i = 0; i < aEle.length; i++) {
+        aEle[i].style.transform = "rotateY(" + (i * (360 / aEle.length)) + "deg) translateZ(" + radius + "px)";
+        aEle[i].style.transition = "transform 1s";
+        aEle[i].style.transitionDelay = (delayTime || (aEle.length - i) / 4) + "s";
+      }
     }
 
     function applyTransform(obj) {
-        if (tY > 180) tY = 180;
-        if (tY < 0) tY = 0;
+      if (tY > 180) tY = 180;
+      if (tY < 0) tY = 0;
 
-        obj.style.transform = "rotateX(" + (-tY) + "deg) rotateY(" + tX + "deg)";
+      obj.style.transform = "rotateX(" + (-tY) + "deg) rotateY(" + tX + "deg)";
     }
 
     function playSpin(yes) {
-        ospin.style.animationPlayState = (yes ? 'running' : 'paused');
+      ospin.style.animationPlayState = (yes ? 'running' : 'paused');
     }
 
     var sX, sY, nX, nY, desX = 0, desY = 0, tX = 0, tY = 10;
 
     if (autoRotate) {
-        var animationName = (rotateSpeed > 0) ? 'spin' : 'spinRevert';
-        ospin.style.animation = `${animationName} ${Math.abs(rotateSpeed)}s infinite linear`;
+      var animationName = (rotateSpeed > 0) ? 'spin' : 'spinRevert';
+      ospin.style.animation = `${animationName} ${Math.abs(rotateSpeed)}s infinite linear`;
     }
 
     document.onpointerdown = function(e) {
-        clearInterval(odrag.timer);
+      clearInterval(odrag.timer);
+      e = e || window.event;
+      sX = e.clientX;
+      sY = e.clientY;
+
+      this.onpointermove = function(e) {
         e = e || window.event;
-        sX = e.clientX;
-        sY = e.clientY;
+        var nX = e.clientX;
+        var nY = e.clientY;
+        desX = nX - sX;
+        desY = nY - sY;
+        tX += desX * 0.1;
+        tY += desY * 0.1;
+        applyTransform(odrag);
+        sX = nX;
+        sY = nY;
+      };
 
-        this.onpointermove = function(e) {
-            e = e || window.event;
-            var nX = e.clientX;
-            var nY = e.clientY;
-            desX = nX - sX;
-            desY = nY - sY;
-            tX += desX * 0.1;
-            tY += desY * 0.1;
-            applyTransform(odrag);
-            sX = nX;
-            sY = nY;
-        };
+      this.onpointerup = function(e) {
+        this.onpointermove = this.onpointerup = null;
+        odrag.timer = setInterval(function() {
+          desX *= 0.95;
+          desY *= 0.95;
+          tX += desX * 0.1;
+          tY += desY * 0.1;
+          applyTransform(odrag);
+          playSpin(false);
+          if (Math.abs(desX) < 0.5 && Math.abs(desY) < 0.5) {
+            clearInterval(odrag.timer);
+            playSpin(true);
+          }
+        }, 17);
+      };
 
-        this.onpointerup = function(e) {
-            this.onpointermove = this.onpointerup = null;
-            odrag.timer = setInterval(function() {
-                desX *= 0.95;
-                desY *= 0.95;
-                tX += desX * 0.1;
-                tY += desY * 0.1;
-                applyTransform(odrag);
-                playSpin(false);
-                if (Math.abs(desX) < 0.5 && Math.abs(desY) < 0.5) {
-                    clearInterval(odrag.timer);
-                    playSpin(true);
-                }
-            }, 17);
-        };
-
-        return false;
+      return false;
     };
-
-</script>
+  </script>
 </body>
+
 </html>
