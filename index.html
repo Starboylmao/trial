@@ -1,67 +1,77 @@
 <!DOCTYPE html>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-  }
-
-  html,
-  body {
-    height: 100%;
-  }
-
-  body {
-    overflow: hidden;
-    display: flex;
-    background: #070716;
-    perspective: 1000px;
-    transform-style: preserve-3d;
-  }
-
-  #drag,
-  #spin {
-    position: relative;
-    display: flex;
-    margin: auto;
-    align-items: center;
-    justify-items: center;
-    transform-style: preserve-3d;
-    transform: rotateX(-5deg);
-  }
-
-  #drag .product-card {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform-style: preserve-3d;
-    transform: translate(-50%, -50%);
-    transition: transform 0.3s ease;
-    cursor: pointer;
-  }
-
-  #drag .product-card:hover {
-    transform: scale(1.05);
-  }
-
-  #ground {
-    width: 900px;
-    height: 900px;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotateX(90deg);
-  }
-
-  @keyframes spinRevert {
-    from {
-      transform: rotateY(360deg);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    to {
-      transform: rotateY(0deg);
+  
+    html,
+    body {
+      height: 100%;
     }
-  }
-</style>
-
+  
+    body {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: #070716;
+      perspective: 1000px;
+      transform-style: preserve-3d;
+    }
+  
+    #drag {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transform: rotateX(-5deg);
+    }
+  
+    #spin {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+  
+    .product-card {
+      position: absolute;
+      left: 50%;
+      top: -50px; /* Adjust the top value as desired */
+      transform-style: preserve-3d;
+      transform: translate(-50%, 0) rotateY(0deg);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+  
+    .product-card:hover {
+      transform: translate(-50%, 0) scale(1.05);
+    }
+  
+    #ground {
+      width: 900px;
+      height: 900px;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotateX(90deg);
+    }
+  
+    @keyframes spinRevert {
+      from {
+        transform: rotateY(360deg);
+      }
+      to {
+        transform: rotateY(0deg);
+      }
+    }
+  </style>
+    
+  
+  
 <html lang="en">
 
 <head>
@@ -111,7 +121,7 @@
   </div>
 
   <script>
-   var radius = 200;
+   var radius = 340;
 var autoRotate = true;
 var rotateSpeed = -60;
 var imgWidth = 200;
