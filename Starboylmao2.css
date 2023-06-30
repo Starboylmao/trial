@@ -1,62 +1,88 @@
-*{
-    margin: 0;
-    padding: 0;
-}
 
-html, body{
-    height: 100%;
-}
-
-body{
-    overflow: hidden;
-    display: flex;
-    background: #070716;
-    perspective: 1000px;
-    transform-style: preserve-3d; 
-}
-
-#drag, #spin{
-    position: relative;
-    display: flex;
-    margin: auto;
-    align-items: center;
-    transform-style: preserve-3d;
-    transform: rotateX(-10deg) ;
-}
-
-#drag img{
-    transform-style: preserve-3d;
-    position:absolute;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    line-height: 200px;
-    text-align: center;
-    box-shadow: 0 0 8px #fff;
-    -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, #0005);
-}
-
-#drag img-hover{
-    box-shadow: 0 0 15px #fffd;
-    -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, #0007);
-}
-
-#ground{
-    width:900px;
-    height:900px;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotateX(90deg);
-}
-
-@keyframes spinRevert{
-    from{
-        transform: rotateY(360deg);
-    }
-    to{
-        transform: rotateY(0deg);
+<style>
+    body {
+        background-color: rgb(24, 142, 220);
     }
 
-}
+    .carousel-container {
+        max-width: 800px; /* Adjust the maximum width as per your requirement */
+        margin: 0 auto;
+    }
+
+    .responsive {
+        display: flex;
+        justify-content: center;
+        gap: 20px; /* Adjust the gap between images */
+        margin: 20px;
+        overflow: hidden; /* Ensure the buttons are visible within the container */
+    }
+
+    .responsive .card {
+        flex: 0 0 calc((100% - 3 * 20px) / 4);
+        height: 200px;
+        border: none;
+        background-color: transparent;
+        transition: transform 0.5s ease;
+        position: relative;
+    }
+
+    .responsive .card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .responsive .card .text-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        text-align: center;
+    }
+
+    .responsive .card .text-overlay h4 {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .responsive .slick-current {
+        transform: scale(1.2);
+        z-index: 2;
+    }
+
+    .responsive .slick-slide:not(.slick-current) {
+        transform: scale(0.8);
+        z-index: 1;
+    }
+
+    /* Adjust the style of the navigation buttons */
+    .slick-prev,
+    .slick-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        font-size: 0;
+        line-height: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+    .slick-prev:hover,
+    .slick-next:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .slick-prev {
+        left: -20px;
+    }
+
+    .slick-next {
+        right: -20px;
+    }
+</style>
